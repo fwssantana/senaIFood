@@ -8,16 +8,18 @@ public class Pedido {
 
 	private List<ItemPedido> itens;
 	private Cliente cliente;
-	private double valor;
 	private Estabelecimento estabelecimento;
 	private LocalDateTime data;
 	private String observacao;
 	private String apelidoEndereco;
 	private SituacaoPedido situacao;
 	private boolean entrega;
+	private Entregador entregador;
 
 	public Pedido() {
 		this.itens = new ArrayList<ItemPedido>();
+		this.data = LocalDateTime.now();
+		this.situacao = SituacaoPedido.PENDENTE;
 	}
 
 	public List<ItemPedido> getItens() {
@@ -36,12 +38,13 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public double getValor() {
+	public double calculaValor() {
+		double valor = 0;
+		for (ItemPedido itemPedido : itens) {
+			valor += itemPedido.getQuantidade() 
+					* itemPedido.getProduto().getValor();
+		}
 		return valor;
-	}
-
-	public void setValor(double valor) {
-		this.valor = valor;
 	}
 
 	public Estabelecimento getEstabelecimento() {
@@ -54,10 +57,6 @@ public class Pedido {
 
 	public LocalDateTime getData() {
 		return data;
-	}
-
-	public void setData(LocalDateTime data) {
-		this.data = data;
 	}
 
 	public String getObservacao() {
@@ -90,6 +89,14 @@ public class Pedido {
 
 	public void setEntrega(boolean entrega) {
 		this.entrega = entrega;
+	}
+
+	public Entregador getEntregador() {
+		return entregador;
+	}
+
+	public void setEntregador(Entregador entregador) {
+		this.entregador = entregador;
 	}
 	
 }

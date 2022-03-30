@@ -1,5 +1,7 @@
 package br.senai.senaifood;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Cliente extends Pessoa {
@@ -9,6 +11,26 @@ public class Cliente extends Pessoa {
 	
 	public Cliente() {
 		super(TipoPessoa.CLIENTE);
+		this.enderecoPorApelido = new HashMap<String, Endereco>();
+	}
+	
+	public Pedido realizaPedido(Estabelecimento estab, List<ItemPedido> itens, 
+			String apelidoEndereco, String observacao) {
+		// ! = não lógico
+		if (!enderecoPorApelido.containsKey(apelidoEndereco)) {
+			System.out.println("Endereço inválido");
+			return null;
+		} 
+		
+		Pedido pedido = new Pedido();
+		pedido.setCliente(this);
+		pedido.setEntrega(true);
+		pedido.setEstabelecimento(estab);
+		pedido.setObservacao(observacao);
+		pedido.setItens(itens);
+		pedido.setApelidoEndereco(apelidoEndereco);
+		
+		return pedido;
 	}
 	
 	public String getEmail() {

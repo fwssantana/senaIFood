@@ -34,10 +34,6 @@ public abstract class Pessoa {
 		return tipo;
 	}
 
-	public void setTipo(TipoPessoa tipo) {
-		this.tipo = tipo;
-	}
-
 	@Override
 	public String toString() {
 		return nome + ":" + telefone;
