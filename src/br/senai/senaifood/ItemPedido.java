@@ -4,7 +4,7 @@ public class ItemPedido {
 
 	private Produto produto;
 	private int quantidade;
-	private String comentário;
+	private String comentario;
 	
 	public ItemPedido() {
 		
@@ -26,12 +26,12 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 	}
 
-	public String getComentário() {
-		return comentário;
+	public String getComentario() {
+		return comentario;
 	}
 
-	public void setComentário(String comentário) {
-		this.comentário = comentário;
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 
 }
