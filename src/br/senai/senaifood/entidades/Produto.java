@@ -1,12 +1,32 @@
-package br.senai.senaifood;
+package br.senai.senaifood.entidades;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Produto {
 
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@Column
 	private String nome;
+	@Column
 	private String descricao;
+	@Column
 	private double valor;
+	@Column
 	private boolean disponivel;
+	@Column
+	@Enumerated
 	private CategoriaProduto categoria;
+	@ManyToOne
+	private Estabelecimento estabelecimento;
 	
 	public String getNome() {
 		return nome;
@@ -37,5 +57,11 @@ public class Produto {
 	}
 	public void setCategoria(CategoriaProduto categoria) {
 		this.categoria = categoria;
+	}
+	public Estabelecimento getEstabelecimento() {
+		return estabelecimento;
+	}
+	public void setEstabelecimento(Estabelecimento estabelecimento) {
+		this.estabelecimento = estabelecimento;
 	}
 }

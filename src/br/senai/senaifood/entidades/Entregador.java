@@ -1,16 +1,18 @@
-package br.senai.senaifood;
+package br.senai.senaifood.entidades;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 
+@Entity
 public class Entregador extends Pessoa {
 
+	@Column
+	@Enumerated
 	private ModalidadeTransporte modalidadeTransporte;
-	private List<Pedido> pedidos;
 
 	public Entregador() {
 		super(TipoPessoa.ENTREGADOR);
-		this.pedidos = new ArrayList<Pedido>();
 	}
 
 	public boolean realizaEntrega(Pedido pedido) {
@@ -31,12 +33,4 @@ public class Entregador extends Pessoa {
 		this.modalidadeTransporte = modalidadeTransporte;
 	}
 
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-	
 }
