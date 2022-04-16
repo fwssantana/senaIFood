@@ -1,4 +1,4 @@
-package br.senai.senaifood;
+package br.senai.senaifood.entidades;
 
 public enum TipoPessoa {
 

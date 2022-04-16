@@ -1,16 +1,35 @@
-package br.senai.senaifood;
+package br.senai.senaifood.entidades;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Estabelecimento {
 
+	@Id
+	@GeneratedValue
+	private Long id;
+	@Column
 	private String cnpj;
+	@Column
 	private String nome;
+	@Column
 	private int previsaoMinima;
+	@Column
 	private int previsaoMaxima;
-	private Set<Produto> produtos = new HashSet<Produto>();
+	@OneToMany(mappedBy = "estabelecimento")
+	private Set<Produto> produtos;
+	@OneToMany(mappedBy = "estabelecimento")
 	private Set<Pedido> pedidos;
+	@Column
+	@Enumerated
 	private CategoriaEstabelecimento categoria;
 	
 	public Estabelecimento() {
@@ -84,12 +103,12 @@ public class Estabelecimento {
 	
 	public void enviaPedido(Pedido pedidoConcluido) {
 		if (!pedidos.contains(pedidoConcluido)) {
-			System.out.println("Pedido inválido!");
+			System.out.println("Pedido invï¿½lido!");
 		}
 		
-		Entregador entregador = App.getEntregadores().get(0);
-		entregador.getPedidos().add(pedidoConcluido);
-		pedidoConcluido.setEntregador(entregador);
+//		Entregador entregador = App.getEntregadores().get(0);
+//		entregador.getPedidos().add(pedidoConcluido);
+//		pedidoConcluido.setEntregador(entregador);
 		pedidoConcluido.setSituacao(SituacaoPedido.ENTREGANDO);
 	}
 	

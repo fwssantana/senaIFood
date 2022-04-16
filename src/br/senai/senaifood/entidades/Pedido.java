@@ -1,24 +1,51 @@
-package br.senai.senaifood;
+package br.senai.senaifood.entidades;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity(name = "pedidos")
 public class Pedido {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	@OneToMany
 	private List<ItemPedido> itens;
+	@ManyToOne
 	private Cliente cliente;
+	@ManyToOne
 	private Estabelecimento estabelecimento;
-	private LocalDateTime data;
+	@Column(name = "dataPedido")
+	@Temporal(value = TemporalType.TIMESTAMP)
+	private Date data;
+	@Column(length = 30)
 	private String observacao;
+	@Column
 	private String apelidoEndereco;
+	@Column
+	@Enumerated(value = EnumType.ORDINAL)
 	private SituacaoPedido situacao;
+	@Column
 	private boolean entrega;
+	@ManyToOne
 	private Entregador entregador;
 
 	public Pedido() {
 		this.itens = new ArrayList<ItemPedido>();
-		this.data = LocalDateTime.now();
+		this.data = new Date();
 		this.situacao = SituacaoPedido.PENDENTE;
 	}
 
@@ -55,7 +82,7 @@ public class Pedido {
 		this.estabelecimento = estabelecimento;
 	}
 
-	public LocalDateTime getData() {
+	public Date getData() {
 		return data;
 	}
 
