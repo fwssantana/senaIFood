@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,10 +25,19 @@ public class ClienteController {
 
 	@Autowired
 	private PedidoService pedidoService;
+	
+	@GetMapping("/cliente/")
+	public ResponseEntity<String> testeCliente() {
+		if (false) {
+			return new ResponseEntity<>("Requisicao invalida!", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>("Entidade foi criada com sucesso!", HttpStatus.CREATED);
+	}
 
 	@PostMapping("/cliente/")
-	public void salvaCliente(@Valid @RequestBody Cliente cliente) {
+	public ResponseEntity salvaCliente(@Valid @RequestBody Cliente cliente) {
 		this.clienteService.cadastraCliente(cliente);
+		return new ResponseEntity<>(cliente, HttpStatus.CREATED);
 	}
 
 	@GetMapping("/cliente/{id}")
