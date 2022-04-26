@@ -15,7 +15,7 @@ public class Endereco {
 	private Long id;
 	@Column(name = "endereco")
 	private String endereco;
-	@Column()
+	@Column
 	private String complemento;
 	@Column
 	private String cep;

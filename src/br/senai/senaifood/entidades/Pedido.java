@@ -1,7 +1,7 @@
 package br.senai.senaifood.entidades;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,8 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity(name = "pedidos")
 public class Pedido {
@@ -28,9 +26,8 @@ public class Pedido {
 	private Cliente cliente;
 	@ManyToOne
 	private Estabelecimento estabelecimento;
-	@Column(name = "dataPedido")
-	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date data;
+	@Column(name = "data", columnDefinition = "DATE")
+	private LocalDate data;
 	@Column(length = 30)
 	private String observacao;
 	@Column
@@ -45,7 +42,7 @@ public class Pedido {
 
 	public Pedido() {
 		this.itens = new ArrayList<ItemPedido>();
-		this.data = new Date();
+		this.data = LocalDate.now();
 		this.situacao = SituacaoPedido.PENDENTE;
 	}
 
@@ -82,7 +79,7 @@ public class Pedido {
 		this.estabelecimento = estabelecimento;
 	}
 
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 

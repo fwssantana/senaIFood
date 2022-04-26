@@ -11,5 +11,7 @@ import br.senai.senaifood.entidades.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 
 	public Optional<Cliente> findById(Long id);
+	public Optional<Cliente> findByEmailAndCpf(String param1, 
+			String param2);
 	
 }

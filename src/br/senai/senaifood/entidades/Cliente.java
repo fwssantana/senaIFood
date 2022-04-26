@@ -6,13 +6,18 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Cliente extends Pessoa {
 	
 	@Column
+	@NotBlank
 	private String email;
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @NotEmpty
 	private List<Endereco> enderecos;
 	
 	public Cliente() {
