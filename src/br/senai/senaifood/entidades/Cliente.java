@@ -8,16 +8,16 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
+import lombok.Data;
 
 @Entity
+@Data
 public class Cliente extends Pessoa {
 	
 	@Column
-	@NotBlank
 	private String email;
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    @NotEmpty
 	private List<Endereco> enderecos;
 	
 	public Cliente() {
@@ -50,22 +50,6 @@ public class Cliente extends Pessoa {
 		return pedido;
 	}
 	
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public List<Endereco> getEnderecos() {
-		return enderecos;
-	}
-
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
-
 	@Override
 	public String toString() {
 		return this.nome + ":" + this.email;

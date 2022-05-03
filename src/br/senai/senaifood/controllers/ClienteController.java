@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.senai.senaifood.dto.CriaClienteDTO;
 import br.senai.senaifood.entidades.Cliente;
 import br.senai.senaifood.services.ClienteService;
 import br.senai.senaifood.services.PedidoService;
@@ -35,7 +36,7 @@ public class ClienteController {
 	}
 
 	@PostMapping("/cliente/")
-	public ResponseEntity salvaCliente(@Valid @RequestBody Cliente cliente) {
+	public ResponseEntity salvaCliente(@Valid @RequestBody CriaClienteDTO cliente) {
 		this.clienteService.cadastraCliente(cliente);
 		return new ResponseEntity<>(cliente, HttpStatus.CREATED);
 	}
